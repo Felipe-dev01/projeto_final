@@ -1,5 +1,5 @@
 // Substitua pela sua chave de API obtida no site da NewsAPI
-const apiKey = 'SUA_CHAVE_DE_API';
+const apiKey = '7777404f46d64de692f225f76a392cad';
 
 // URL da API para buscar as últimas notícias
 const url = 'https://newsapi.org/v2/top-headlines';
