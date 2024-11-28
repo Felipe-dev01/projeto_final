@@ -1,33 +1,47 @@
 // Consts
 const apikey = "e950e51d5d49e85f7c2f17f01eb23ba3";
-const apiEndpoint = "https://api.themoviedb.org/3"
+const apiEndpoint = "https://api.themoviedb.org/3";
 const imgPath = "https://image.tmdb.org/t/p/original";
 
-
 const apiPaths = {
-    buscarTodasCategorias: `${apiEndpoint}/genre/movie/list?api_key=${apikey}`,
-    buscarListaFilmes: (id) => `${apiEndpoint}/discover/movie?api_key=${apikey}&with_genres=${id}`,
-    buscarTrending:`${apiEndpoint}/trending/all/day?api_key=${apikey}&language=pt-BR`,
-}
-
+    buscarTrending: `${apiEndpoint}/trending/all/day?api_key=${apikey}&language=pt-BR`,
+};
 
 // Inicializa o app
 function inicializar() {
     buscarFilmesCarrossel();
-    buscarEConstruirTodasSecoes();
 }
 
-function buscarFilmesCarrossel(){
-    buscarEConstruirSecaoFilmes(apiPaths.buscarTrending, 'Trending Now')
-    .then(lista => {
-        const indiceAleatorio = parseInt(Math.random() * lista.length);
-        construirSecaoBanner(lista[indiceAleatorio]);
-    })
+function buscarFilmesCarrossel() {
+    fetch(apiPaths.buscarTrending)
+        .then(res => res.json())
+        .then(res => {
+            console.log('Resposta do trending:', res);  // Verifique se a resposta está correta
+            if (res.results && res.results.length > 0) {
+                const indiceAleatorio = parseInt(Math.random() * res.results.length);
+                construirSecaoBanner(res.results[indiceAleatorio]);
+            } else {
+                console.error('Nenhum filme encontrado no trending.');
+            }
+        })
+        .catch(err => console.error('Erro ao buscar filmes trending:', err));
 }
 
-function construirSecaoBanner(filme){
+function construirSecaoBanner(filme) {
     const bannerCont = document.getElementById('banner-section');
     
+    // Verifica se o bannerContainer existe
+    if (!bannerCont) {
+        console.error('Elemento banner-section não encontrado!');
+        return;
+    }
+
+    // Verifica se o filme tem a propriedade 'backdrop_path'
+    if (!filme || !filme.backdrop_path) {
+        console.error('Filme não tem backdrop_path:', filme);
+        return;
+    }
+
     bannerCont.style.backgroundImage = `url('${imgPath}${filme.backdrop_path}')`;
 
     const div = document.createElement('div');
@@ -42,78 +56,17 @@ function construirSecaoBanner(filme){
         `;
     div.className = "banner-content container";
 
+    // Adiciona o conteúdo do banner ao container
     bannerCont.append(div);
 }
 
-
-function buscarEConstruirTodasSecoes(){
-    fetch(apiPaths.buscarTodasCategorias)
-    .then(res => res.json())
-    .then(res => {
-        const categorias = res.genres;
-        if (Array.isArray(categorias) && categorias.length) {
-            categorias.forEach(categoria => {
-                buscarEConstruirSecaoFilmes(
-                    apiPaths.buscarListaFilmes(categoria.id),
-                    categoria.name
-                );
-            });
-        }
-        // console.table(filmes);
-    })
-    .catch(err=>console.error(err));
-}
-
-function buscarEConstruirSecaoFilmes(urlFetch, nomeCategoria){
-    console.log(urlFetch,nomeCategoria);
-    return fetch(urlFetch)
-    .then(res => res.json())
-    .then(res => {
-        // console.table(res.results);
-        const filmes = res.results;
-        if (Array.isArray(filmes) && filmes.length) {
-            construirSecaoFilmes(filmes.slice(0,6), nomeCategoria);
-        }
-        return filmes;
-    })
-    .catch(err=>console.error(err))
-}
-
-function construirSecaoFilmes(lista, nomeCategoria){
-    console.log(lista, nomeCategoria);
-
-    const filmesCont = document.getElementById('movies-cont');
-    
-    const criaListaFilmes = lista.map(item => {
-        return `
-        <div class="movie-item")">
-            <img class="move-item-img" src="${imgPath}${item.backdrop_path}" alt="${item.title}" />
-            <div class="iframe-wrap" id="yt${item.id}"></div>
-        </div>`;
-    }).join('');
-
-    const filmesSecaoHTML = `
-        <h2 class="movie-section-heading">${nomeCategoria}</h2>
-        <div class="movies-row">
-            ${criaListaFilmes}
-        </div>
-    `
-
-    const div = document.createElement('div');
-    div.className = "movies-section"
-    div.innerHTML = filmesSecaoHTML;
-
-    // adiciona html no container de filmes
-    filmesCont.append(div);
-}
-
 // Evento para inicializar o app assim que a página carregar
-window.addEventListener('load',function() {
+window.addEventListener('load', function () {
     inicializar();
-    window.addEventListener('scroll', function(){
+    window.addEventListener('scroll', function () {
         // atualiza a UI do cabeçalho
         const header = document.getElementById('header');
-        if (window.scrollY > 5) header.classList.add('black-bg')
+        if (window.scrollY > 5) header.classList.add('black-bg');
         else header.classList.remove('black-bg');
-    })
-})
+    });
+});
