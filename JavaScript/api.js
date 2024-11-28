@@ -1,49 +1,42 @@
-// Substitua pela sua chave de API obtida no site da NewsAPI
-const apiKey = '7777404f46d64de692f225f76a392cad';
-
-// URL da API para buscar as últimas notícias
-const url = 'https://newsapi.org/v2/top-headlines';
-
-// Função para buscar e exibir notícias
-async function fetchNews() {
-    try {
-        // Fazendo a requisição GET para a API
-        const response = await fetch(`${url}?country=br&apiKey=${apiKey}`);
-        
-        // Verificando se a resposta foi bem-sucedida
-        if (!response.ok) {
-            throw new Error('Erro ao buscar as notícias');
-        }
-        
-        // Convertendo a resposta para JSON
-        const data = await response.json();
-        
-        // Pegando o container de notícias
-        const newsContainer = document.getElementById('news-container');
-        
-        // Limpando qualquer conteúdo anterior
-        newsContainer.innerHTML = '';
-        
-        // Iterando sobre os artigos retornados e exibindo na página
-        data.articles.forEach(article => {
-            // Criando o HTML para cada artigo
-            const newsCard = document.createElement('div');
-            newsCard.classList.add('news-card');
-            
-            newsCard.innerHTML = `
-                <h2>${article.title}</h2>
-                <p>${article.description}</p>
-                <a href="${article.url}" target="_blank">Leia mais</a>
-            `;
-            
-            // Adicionando o artigo ao container de notícias
-            newsContainer.appendChild(newsCard);
+const API_KEY = '21d85e7e';
+const searchQuery = 'avengers'; // Exemplo de pesquisa
+ 
+// Função para buscar filmes
+function buscarFilmes() {
+    const url = `https://www.omdbapi.com/?s=${searchQuery}&apikey=${API_KEY}`;
+ 
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            const resultadosDiv = document.getElementById('resultados'); // Seleciona o contêiner
+ 
+            if (data.Response === 'True') {
+                // Limpa o contêiner antes de adicionar novos resultados
+                resultadosDiv.innerHTML = '';
+ 
+                data.Search.forEach(filme => {
+                    const filmeDiv = document.createElement('div');
+                    filmeDiv.classList.add('filme');
+                   
+                    // Cria o conteúdo HTML para o filme
+                    filmeDiv.innerHTML = `
+                        <h3>${filme.Title} (${filme.Year})</h3>
+                        <img src="${filme.Poster}" alt="Poster de ${filme.Title}">
+                    `;
+                   
+                    // Adiciona o filme ao contêiner
+                    resultadosDiv.appendChild(filmeDiv);
+                });
+            } else {
+                resultadosDiv.innerHTML = `<p>Erro ao buscar filmes: ${data.Error}</p>`;
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao fazer requisição:', error);
+            const resultadosDiv = document.getElementById('resultados');
+            resultadosDiv.innerHTML = `<p>Erro ao fazer a requisição. Tente novamente mais tarde.</p>`;
         });
-    } catch (error) {
-        console.error('Erro:', error);
-        document.getElementById('news-container').innerHTML = 'Não foi possível carregar as notícias.';
-    }
 }
-
-// Chama a função para carregar as notícias ao carregar a página
-fetchNews();
+ 
+// Chama a função para buscar os filmes
+buscarFilmes();

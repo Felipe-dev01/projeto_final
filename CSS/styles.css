@@ -1,60 +1,39 @@
-/* Resetando margens e padding */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Estilizando o corpo da página */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
-    margin: 20px;
-}
-
-/* Estilizando o container principal */
-.container {
-    max-width: 800px;
-    margin: 0 auto;
+.carrossel {
+    position: relative;
+    width: 500px; /* ajuste o tamanho conforme necessário */
+    overflow: hidden;
+  }
+  
+  .carrossel-container {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .news-item {
+    width: 500px; /* a mesma largura da div carrossel */
     padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Estilizando o título */
-h1 {
-    text-align: center;
-    font-size: 2em;
-    margin-bottom: 20px;
-}
-
-/* Estilizando cada notícia */
-.news-card {
-    background-color: #fafafa;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    padding: 15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.news-card h2 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-}
-
-.news-card p {
-    font-size: 1em;
-    color: #555;
-}
-
-.news-card a {
-    color: #0066cc;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.news-card a:hover {
-    text-decoration: underline;
-}
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    margin: 0 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+  }
+  
+  button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+  }
+  
+  .prev {
+    left: 0;
+  }
+  
+  .next {
+    right: 0;
+  }
