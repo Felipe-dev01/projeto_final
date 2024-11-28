@@ -7,6 +7,7 @@
     <title>Netflix clone</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="style(anterior).css">
     <script src="index.js" defer></script>
 </head>
 <body>
@@ -33,12 +34,25 @@
         <div class="banner_fadeBottom"></div>
     </div>
     <!-- banner section end -->
+<!--------------->
+<div class="carousel-container">
+    <button class="prev" id="prev">❮</button>
+    <div class="carousel" id="carousel">
+        
+    </div>
+    <button class="next" id="next">❯</button>
+  </div>
+
+  <div class="sinopse-container" id="sinopse-container">
+    <p id="sinopse-text">Clique em uma imagem para ver a sinopse do filme.</p>
+  </div>
+
 
     <!-- movies sections -->
     <div class="movies-cont container" id="movies-cont">
     </div>
     <!-- movies sections end -->
 
-    
+    <script src="api.js"></script>  
 </body>
 </html>
