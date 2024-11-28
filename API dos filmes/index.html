@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <div class="header-container">
+        <div class="logo-container">
+            <img src="imagens/logo.png" alt="Logo">
+        </div>
+        <div class="busca-container">
+            <input type="text" id="titulo-filme" placeholder="Digite o título do filme">
+            <button id="btn-buscar">Buscar</button>
+        </div>
+    </div>
+    
+    <section id="resultados-busca" class="linha-filmes"></section>
+
+    <section class="categoria-filmes">
+        <h2>Populares</h2>
+        <div class="linha-filmes" id="filmes-populares">
+            <!-- Filmes populares vão aparecer aqui -->
+        </div>
+    </section>
+
+    <section class="categoria-filmes">
+        <h2>Melhores Avaliações</h2>
+        <div class="linha-filmes" id="filmes-avaliados">
+            <!-- Filmes com melhores avaliações -->
+        </div>
+    </section>
+
+    <section class="categoria-filmes">
+        <h2>Recomendações</h2>
+        <div class="linha-filmes" id="filmes-recomendados">
+            <!-- Recomendações -->
+        </div>
+    </section>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

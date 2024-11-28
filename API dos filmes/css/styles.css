@@ -1,0 +1,163 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #141414;
+    color: #fff;
+    padding: 0 20px;
+    padding-top: 60px; /* Espaço para a barra de navegação fixa */
+}
+
+/* Header fixo */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #000;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+/* Estilo para o logo */
+.logo-container img {
+    width: 50px;
+    height: auto;
+}
+
+/* Estilo para o campo de pesquisa */
+#titulo-filme {
+    width: 300px;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+/* Estilo para o botão de busca */
+#btn-buscar {
+    padding: 10px 20px;
+    background-color: #e50914;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;
+}
+
+#btn-buscar:hover {
+    background-color: #b0070f;
+}
+
+/* Categorias de filmes */
+.categoria-filmes {
+    margin-bottom: 40px;
+}
+
+.categoria-filmes h2 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.linha-filmes {
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.linha-filmes::-webkit-scrollbar {
+    display: none;
+}
+
+.cartao-filme {
+    background-color: #222;
+    margin-right: 10px;
+    padding: 10px;
+    width: 150px;
+    flex: none;
+    text-align: center;
+    border-radius: 5px;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.cartao-filme img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.cartao-filme:hover {
+    transform: scale(1.1);
+}
+
+/* Estilos para os resultados da busca */
+#resultados-busca {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#resultados-busca .cartao-filme {
+    margin-bottom: 20px;
+    width: calc(25% - 20px);
+}
+
+@media (max-width: 768px) {
+    #resultados-busca .cartao-filme {
+        width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 480px) {
+    #resultados-busca .cartao-filme {
+        width: calc(100% - 20px);
+    }
+}
+
+/* Detalhes do filme */
+.detalhes-filme-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-top: 40px;
+    background-color: #222;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.cartaz-filme img {
+    width: 300px;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.info-filme {
+    color: #fff;
+}
+
+.info-filme h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.info-filme p {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.info-filme p strong {
+    color: #e50914;
+}
