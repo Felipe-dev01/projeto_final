@@ -70,3 +70,75 @@ window.addEventListener('load', function () {
         else header.classList.remove('black-bg');
     });
 });
+
+
+function construirSecaoBanner(filme) {
+    const bannerCont = document.getElementById('banner-section');
+    
+    // Verifica se o bannerContainer existe
+    if (!bannerCont) {
+        console.error('Elemento banner-section não encontrado!');
+        return;
+    }
+
+    // Verifica se o filme tem a propriedade 'backdrop_path'
+    if (!filme || !filme.backdrop_path) {
+        console.error('Filme não tem backdrop_path:', filme);
+        return;
+    }
+
+    bannerCont.style.backgroundImage = `url('${imgPath}${filme.backdrop_path}')`;
+
+    const div = document.createElement('div');
+
+    div.innerHTML = `
+            <h2 class="banner__title">${filme.title}</h2>
+            <p class="banner__info">Filmes em alta | Data de Lançamento - ${filme.release_date} </p>
+            <p class="banner__overview" id="overview-short">${filme.overview && filme.overview.length > 200 ? filme.overview.slice(0,200).trim()+ '...':filme.overview}</p>
+            <div class="action-buttons-cont">
+                <button class="action-button" id="more-info-btn">Mais Informações</button>
+            </div>
+        `;
+    div.className = "banner-content container";
+
+    // Adiciona o conteúdo do banner ao container
+    bannerCont.append(div);
+
+    // Adiciona o evento de clique no botão de mais informações
+    const moreInfoButton = document.getElementById('more-info-btn');
+
+    moreInfoButton.addEventListener('click', function () {
+        // Cria o modal
+        const modal = document.createElement('div');
+        modal.id = 'modal-overlay';
+        modal.className = 'modal-overlay';
+
+        const modalContent = document.createElement('div');
+        modalContent.className = 'modal-content';
+
+        modalContent.innerHTML = `
+            <button id="close-modal" class="close-modal">X</button>
+            <img src="${imgPath}${filme.poster_path}" alt="${filme.title}" class="modal-image" />
+            <h2 class="modal-title">${filme.title}</h2>
+            <p class="modal-release-date">Data de Lançamento: ${filme.release_date}</p>
+            <p class="modal-overview">${filme.overview || "Sinopse não disponível."}</p>
+            <p class="modal-writer">Escritor: ${filme.writer || "Não disponível"}</p>
+        `;
+
+        modal.appendChild(modalContent);
+        document.body.appendChild(modal);
+
+        // Fecha o modal quando clicar no botão de fechar
+        const closeModalButton = document.getElementById('close-modal');
+        closeModalButton.addEventListener('click', function () {
+            document.body.removeChild(modal);
+        });
+
+        // Fecha o modal ao clicar fora dele
+        modal.addEventListener('click', function (e) {
+            if (e.target === modal) {
+                document.body.removeChild(modal);
+            }
+        });
+    });
+}
