@@ -10,7 +10,7 @@ const apiPaths = {
 // Inicializa o app
 function inicializar() {
     buscarFilmesCarrossel();  // Primeira chamada para carregar o filme
-    setInterval(buscarFilmesCarrossel, 5000);  // Chama a função a cada 5 segundos
+    setInterval(buscarFilmesCarrossel, 2000);  // Chama a função a cada 5 segundos
 }
 
 function buscarFilmesCarrossel() {
