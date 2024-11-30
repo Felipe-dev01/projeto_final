@@ -51,6 +51,7 @@ function showSlide(index) {
 function showSinopseModal(filme) {
   $('#modal-title').text(filme.title);
   $('#modal-sinopse-text').text(filme.overview || 'Sinopse não disponível');
+  $('#modal-poster').attr('src', `https://image.tmdb.org/t/p/w500${filme.poster_path}`); // Atualiza a imagem do poster
   getCategoria(filme.genre_ids);
   
   $('#modal-sinopse').fadeIn();

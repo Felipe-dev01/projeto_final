@@ -78,6 +78,7 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
+  padding: 20px;
 }
 
 .modal-content {
@@ -85,8 +86,20 @@ body {
   padding: 20px;
   border-radius: 8px;
   width: 80%;
-  max-width: 600px;
+  max-width: 800px;
   color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Alinha os itens horizontalmente */
+  justify-content: center; /* Alinha os itens verticalmente */
+  text-align: center;
+}
+
+.modal-poster {
+  max-width: 100%; /* Ajusta a largura do poster */
+  max-height: 400px; /* Limita a altura do poster */
+  margin-bottom: 20px; /* Espaço entre o poster e a sinopse */
+  border-radius: 8px;
 }
 
 button.close-modal {
@@ -98,4 +111,19 @@ button.close-modal {
   font-size: 24px;
   color: black;
   cursor: pointer;
+}
+
+#modal-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+#modal-sinopse-text {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+#modal-categoria {
+  font-size: 14px;
+  color: gray;
 }
